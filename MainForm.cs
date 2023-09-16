@@ -61,6 +61,11 @@ namespace DoomLauncher
 
             pnlPlaySettings.Enabled = !demoTime;
             pnlPlaySettings.Visible = !demoTime;
+
+            txtOptionalArgs.Enabled = !demoTime;
+            txtOptionalArgs.Visible = !demoTime;
+            txtOptionalDemoArgs.Enabled = demoTime;
+            txtOptionalDemoArgs.Visible = demoTime;
         }
 
 
@@ -187,6 +192,11 @@ namespace DoomLauncher
             if (!pnlPlaySettings.Enabled) // Early exit if only playing demo file.
             {
                 launchCommand.Append($"-playdemo \"{launcherConfig.DemoDirectory + @"\" + lstDemos.SelectedItem}\" ");
+                
+                if (!string.IsNullOrWhiteSpace(txtOptionalDemoArgs.Text))
+                {
+                    launchCommand.Append(txtOptionalDemoArgs.Text);
+                }
                 return launchCommand.ToString();
             }
 
@@ -282,6 +292,7 @@ namespace DoomLauncher
             launcherConfig.RecordDemo = chkRecordDemo.Checked;
             launcherConfig.RecordDemoName = txtDemoName.Text;
             launcherConfig.OptionalArgs = txtOptionalArgs.Text;
+            launcherConfig.OptionalDemoArgs = txtOptionalDemoArgs.Text;
             launcherConfig.PlayDemoName = lstDemos.SelectedIndex > -1 ? lstDemos.SelectedItem.ToString() : null;
             launcherConfig.InPlayDemosMode = !pnlPlaySettings.Enabled;
             launcherConfig.CloseLauncherOnPlay = chkClose.Checked;
@@ -348,7 +359,7 @@ namespace DoomLauncher
             {
                 launcherConfig = JsonSerializer.Deserialize<LauncherConfig>(File.ReadAllText(savePath))!; // Assert now, check later.
 
-                if (launcherConfig == null) // Still not convinced this is even possible, but just in case.
+                if (launcherConfig is null) // Still not convinced this is even possible, but just in case.
                 {
                     launcherConfig = new LauncherConfig();
                     DefaultComboBoxes();
@@ -368,7 +379,7 @@ namespace DoomLauncher
             lblSourcePort.Text = launcherConfig.Sourceport;
             lstIWads.SelectedIndex = lstIWads.FindString(launcherConfig.SelectedIWad);
 
-            if (launcherConfig.SelectedPWads != null)
+            if (launcherConfig.SelectedPWads is not null)
             {
                 foreach (string pwad in launcherConfig.SelectedPWads)
                 {
@@ -393,6 +404,7 @@ namespace DoomLauncher
             chkRecordDemo.Checked = launcherConfig.RecordDemo;
             txtDemoName.Text = launcherConfig.RecordDemoName;
             txtOptionalArgs.Text = launcherConfig.OptionalArgs;
+            txtOptionalDemoArgs.Text = launcherConfig.OptionalDemoArgs;
             lstDemos.SelectedIndex = lstDemos.FindString(launcherConfig.PlayDemoName);
             chkClose.Checked = launcherConfig.CloseLauncherOnPlay;
 

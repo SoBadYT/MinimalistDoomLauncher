@@ -25,6 +25,7 @@ namespace DoomLauncher
         public bool RecordDemo { get; set; }
         public string? RecordDemoName { get; set; }
         public string? OptionalArgs { get; set; }
+        public string? OptionalDemoArgs { get; set; }
 
         public bool InPlayDemosMode { get; set; }
         public string? PlayDemoName { get; set; }

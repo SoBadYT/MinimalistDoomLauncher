@@ -18,7 +18,7 @@ namespace DoomLauncher
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (components is not null))
             {
                 components.Dispose();
             }
@@ -67,6 +67,7 @@ namespace DoomLauncher
             this.txtOptionalArgs = new System.Windows.Forms.TextBox();
             this.lblOptionalArgs = new System.Windows.Forms.Label();
             this.chkClose = new System.Windows.Forms.CheckBox();
+            this.txtOptionalDemoArgs = new System.Windows.Forms.TextBox();
             this.pnlPlaySettings.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -569,14 +570,12 @@ namespace DoomLauncher
             this.lstDemos.Location = new System.Drawing.Point(14, 238);
             this.lstDemos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lstDemos.Name = "lstDemos";
-            this.lstDemos.Size = new System.Drawing.Size(216, 229);
+            this.lstDemos.Size = new System.Drawing.Size(216, 184);
             this.lstDemos.TabIndex = 36;
             this.lstDemos.Visible = false;
             // 
             // pnlPlaySettings
             // 
-            this.pnlPlaySettings.Controls.Add(this.txtOptionalArgs);
-            this.pnlPlaySettings.Controls.Add(this.lblOptionalArgs);
             this.pnlPlaySettings.Controls.Add(this.cboCompLevel);
             this.pnlPlaySettings.Controls.Add(this.lblCompLevel);
             this.pnlPlaySettings.Controls.Add(this.chkShortTics);
@@ -595,12 +594,12 @@ namespace DoomLauncher
             this.pnlPlaySettings.Location = new System.Drawing.Point(8, 217);
             this.pnlPlaySettings.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pnlPlaySettings.Name = "pnlPlaySettings";
-            this.pnlPlaySettings.Size = new System.Drawing.Size(248, 250);
+            this.pnlPlaySettings.Size = new System.Drawing.Size(248, 205);
             this.pnlPlaySettings.TabIndex = 37;
             // 
             // txtOptionalArgs
             // 
-            this.txtOptionalArgs.Location = new System.Drawing.Point(6, 224);
+            this.txtOptionalArgs.Location = new System.Drawing.Point(14, 444);
             this.txtOptionalArgs.MaxLength = 500;
             this.txtOptionalArgs.Name = "txtOptionalArgs";
             this.txtOptionalArgs.Size = new System.Drawing.Size(235, 23);
@@ -609,7 +608,7 @@ namespace DoomLauncher
             // lblOptionalArgs
             // 
             this.lblOptionalArgs.AutoSize = true;
-            this.lblOptionalArgs.Location = new System.Drawing.Point(6, 206);
+            this.lblOptionalArgs.Location = new System.Drawing.Point(14, 426);
             this.lblOptionalArgs.Name = "lblOptionalArgs";
             this.lblOptionalArgs.Size = new System.Drawing.Size(118, 15);
             this.lblOptionalArgs.TabIndex = 39;
@@ -625,12 +624,23 @@ namespace DoomLauncher
             this.chkClose.Text = "Close Launcher on Play";
             this.chkClose.UseVisualStyleBackColor = true;
             // 
+            // txtOptionalDemoArgs
+            // 
+            this.txtOptionalDemoArgs.Location = new System.Drawing.Point(14, 444);
+            this.txtOptionalDemoArgs.MaxLength = 500;
+            this.txtOptionalDemoArgs.Name = "txtOptionalDemoArgs";
+            this.txtOptionalDemoArgs.Size = new System.Drawing.Size(235, 23);
+            this.txtOptionalDemoArgs.TabIndex = 40;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(454, 534);
+            this.Controls.Add(this.txtOptionalDemoArgs);
+            this.Controls.Add(this.txtOptionalArgs);
             this.Controls.Add(this.chkClose);
+            this.Controls.Add(this.lblOptionalArgs);
             this.Controls.Add(this.lblIWads);
             this.Controls.Add(this.lstIWads);
             this.Controls.Add(this.pnlPlaySettings);
@@ -696,5 +706,6 @@ namespace DoomLauncher
         private TextBox txtOptionalArgs;
         private Label lblOptionalArgs;
         private CheckBox chkClose;
+        private TextBox txtOptionalDemoArgs;
     }
 }
